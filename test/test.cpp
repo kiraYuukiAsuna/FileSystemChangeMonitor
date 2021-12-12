@@ -1,6 +1,8 @@
 #include "../include/filesystemchangemonitor.h"
 #include <iostream>
 
+using WRL::operator<<;
+
 // Processes a file action
 class UpdateListener : public WRL::FileMonitorListener
 {
@@ -9,8 +11,8 @@ public:
 	void handleFileAction(WRL::MonitorID monitorID, const WRL::String &dir, const WRL::String &filename,
 						  WRL::Action action)
 	{
-		//std::cout << "DIR (" << dir + ") FILE (" + filename + ") has event " << action << std::endl;
-		std::cout << "DIR (" << dir + ") FILE (" + filename + ") has event " << std::endl;
+		std::cout << "DIR (" << dir + ") FILE (" + filename + ") has event " << action << std::endl;
+		//std::cout << "DIR (" << dir + ") FILE (" + filename + ") has event " << std::endl;
 	}
 };
 
@@ -18,18 +20,18 @@ int main(int argc, char **argv)
 {
 	try
 	{
-		// create the file Monitorer object
-		WRL::FileMonitor fileMonitorer;
+		// create the file Monitor object
+		WRL::FileMonitor fileMonitor;
 
 		// add a Monitor to the system
-		WRL::MonitorID mnitorID = fileMonitorer.addMonitor("./test", new UpdateListener());
+		WRL::MonitorID mnitorID = fileMonitor.addMonitor("./test", new UpdateListener());
 
 		std::cout << "Press ^C to exit demo" << std::endl;
 
 		// loop until a key is pressed
 		while (true)
 		{
-			fileMonitorer.update();
+			fileMonitor.update();
 		}
 	}
 	catch (std::exception &e)

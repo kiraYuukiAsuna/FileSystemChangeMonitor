@@ -11,6 +11,26 @@
 
 namespace WRL
 {
+    std::ostream &operator<<(std::ostream &ostream, Action &action)
+    {
+        switch (action)
+        {
+        case Action::Add:
+        {
+            ostream << "Add";
+        }
+        case Action::Delete:
+        {
+            ostream << "Delete";
+        }
+        case Action::Modified:
+        {
+            ostream << "Modified";
+        }
+        }
+        return ostream;
+    }
+
     FileMonitor::FileMonitor()
     {
         mImpl = new FILEMONITOR_IMPL();
@@ -22,9 +42,9 @@ namespace WRL
         mImpl = 0;
     }
 
-    MonitorID FileMonitor::addMonitor(const String &directory, FileMonitorListener *Monitorer)
+    MonitorID FileMonitor::addMonitor(const String &directory, FileMonitorListener *Monitor)
     {
-        return mImpl->addMonitor(directory, Monitorer);
+        return mImpl->addMonitor(directory, Monitor);
     }
 
     void FileMonitor::removeMonitor(const String &directory)

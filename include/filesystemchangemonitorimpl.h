@@ -22,13 +22,13 @@ namespace WRL
 
         virtual ~FileMonitorImpl() {}
 
-        virtual MonitorID addMonitor(const String &directory, FileMonitorListener *Monitorer) = 0;
+        virtual MonitorID addMonitor(const String &directory, FileMonitorListener *Monitor) = 0;
 
         virtual void removeMonitor(const String &directory) = 0;
 
         virtual void removeMonitor(MonitorID monitorID) = 0;
 
-        // Updates the Monitorer. Must be called often.
+        // Updates the Monitor. Must be called often.
         virtual void update() = 0;
 
         // Handles the action

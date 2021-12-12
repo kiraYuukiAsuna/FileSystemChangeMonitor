@@ -45,10 +45,10 @@ namespace WRL
         mMonitores.clear();
     }
 
-    MonitorID FileMonitorLinux::addMonitor(const String &directory, FileMonitorListener *Monitorer)
+    MonitorID FileMonitorLinux::addMonitor(const String &directory, FileMonitorListener *monitor)
     {
         int wd = inotify_add_watch(mFD, directory.c_str(),
-                                     IN_CLOSE_WRITE | IN_MOVED_TO | IN_CREATE | IN_MOVED_FROM | IN_DELETE);
+                                   IN_CLOSE_WRITE | IN_MOVED_TO | IN_CREATE | IN_MOVED_FROM | IN_DELETE);
         if (wd < 0)
         {
             if (errno == ENOENT)
@@ -61,7 +61,7 @@ namespace WRL
         }
 
         MonitorStruct *pMonitor = new MonitorStruct();
-        pMonitor->mListener = Monitorer;
+        pMonitor->mListener = monitor;
         pMonitor->mMonitorID = wd;
         pMonitor->mDirName = directory;
 

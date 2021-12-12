@@ -25,7 +25,7 @@ namespace WRL
         LPARAM lParam;
         DWORD mNotifyFilter;
         bool mStopNow;
-        FileMonitorImpl *mFileMonitorer;
+        FileMonitorImpl *mFileMonitor;
         FileMonitorListener *mFileMonitorListener;
         char *mDirName;
         MonitorID mMonitorID;
@@ -68,7 +68,7 @@ namespace WRL
                 }
 #endif
 
-                pMonitor->mFileMonitorer->handleAction(pMonitor, szFile, pNotify->Action);
+                pMonitor->mFileMonitor->handleAction(pMonitor, szFile, pNotify->Action);
 
             } while (pNotify->NextEntryOffset != 0);
         }
@@ -159,7 +159,7 @@ namespace WRL
         mMonitores.clear();
     }
 
-    MonitorID FileMonitorWindows::addMonitor(const String &directory, FileMonitorListener *Monitorer)
+    MonitorID FileMonitorWindows::addMonitor(const String &directory, FileMonitorListener *monitor)
     {
         MonitorID monitorID = ++mLastMonitorID;
 
@@ -170,8 +170,8 @@ namespace WRL
             throw FileNotFoundException(directory);
 
         Monitor->mMonitorID = monitorID;
-        Monitor->mFileMonitorer = this;
-        Monitor->mFileMonitorListener = Monitorer;
+        Monitor->mFileMonitor = this;
+        Monitor->mFileMonitorListener = monitor;
         Monitor->mDirName = new char[directory.length() + 1];
         strcpy(Monitor->mDirName, directory.c_str());
 

@@ -19,13 +19,13 @@ namespace WRL
 
         virtual ~FileMonitorLinux();
 
-        MonitorID addMonitor(const String &directory, FileMonitorListener *Monitorer);
+        MonitorID addMonitor(const String &directory, FileMonitorListener *Monitor);
 
         void removeMonitor(const String &directory);
 
         void removeMonitor(MonitorID monitorID);
 
-        // Updates the Monitorer. Must be called often.
+        // Updates the Monitor. Must be called often.
         void update();
 
         // Handles the action

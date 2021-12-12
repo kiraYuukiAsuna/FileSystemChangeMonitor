@@ -2,6 +2,7 @@
 
 #include <stdexcept>
 #include <string>
+#include <iostream>
 
 namespace WRL
 {
@@ -43,13 +44,13 @@ namespace WRL
 
         virtual ~FileMonitor();
 
-        MonitorID addMonitor(const String &directory, FileMonitorListener *Monitorer);
+        MonitorID addMonitor(const String &directory, FileMonitorListener *Monitor);
 
         void removeMonitor(const String &directory);
 
         void removeMonitor(MonitorID monitorID);
 
-        // Updates the Monitorer. Must be called often.
+        // Updates the Monitor. Must be called often.
         void update();
 
     private:
@@ -67,5 +68,7 @@ namespace WRL
         virtual void handleFileAction(MonitorID monitorID, const String &dir,
                                       const String &filename, Action action) = 0;
     };
+
+    std::ostream &operator<<(std::ostream &ostream, Action &action);
 
 }
