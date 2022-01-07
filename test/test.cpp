@@ -3,7 +3,7 @@
 
 using WRL::operator<<;
 
-// Processes a file action
+// Process a file action
 class UpdateListener : public WRL::FileMonitorListener
 {
 public:
@@ -12,7 +12,6 @@ public:
 						  WRL::Action action)
 	{
 		std::cout << "DIR (" << dir + ") FILE (" + filename + ") has event " << action << std::endl;
-		//std::cout << "DIR (" << dir + ") FILE (" + filename + ") has event " << std::endl;
 	}
 };
 
